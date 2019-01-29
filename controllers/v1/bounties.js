@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     // res.send('GET /:id Reached!');
-    db.Bounty.findById(req.param.id)
+    db.Bounty.findById(req.params.id)
     .then(bounty => {
         res.send(bounty)
     })
