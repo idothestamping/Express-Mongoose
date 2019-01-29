@@ -45,6 +45,15 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+    // res.send('PUT PUT PUT!');
+    req.body.hunters = JSON.parse(req.body.hunters);
+    db.Bounty.findOneAndUpdate({ _id: req.params.id }, req.body)
+    .then(bounty => {
+        res.send(bounty);
+    })
+});
+
 router.delete('/:id', (req, res) => {
     // res.send('DELETE /:id Reached!');
     db.Bounty.findByIdAndDelete({ _id: req.params.id })
