@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // res.send('Post Reached!');
-    req.body.hunters = JSON.parse(req.body.hunters);
+    // req.body.hunters = JSON.parse(req.body.hunters);  removed for: app.use(express.json({limit: '50mb'})) 
     db.Bounty.create(req.body)
     .then(bounty => {
         res.status(201).send(bounty);
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     // Array data is sent as a string; parse it
-    req.body.hunters = JSON.parse(req.body.hunters);
+    // req.body.hunters = JSON.parse(req.body.hunters);
     db.Bounty.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(editedBounty => {
       res.send(editedBounty);

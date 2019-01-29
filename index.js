@@ -8,6 +8,7 @@ const app= express();
 // Set up middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json({limit: '50mb'}))
 
 // Controllers
 app.use('/v1/bounties', require('./controllers/v1/bounties'));
