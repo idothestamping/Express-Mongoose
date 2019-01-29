@@ -46,13 +46,17 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    // res.send('PUT PUT PUT!');
+    // Array data is sent as a string; parse it
     req.body.hunters = JSON.parse(req.body.hunters);
-    db.Bounty.findOneAndUpdate({ _id: req.params.id }, req.body)
-    .then(bounty => {
-        res.send(bounty);
+    db.Bounty.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    .then(editedBounty => {
+      res.send(editedBounty);
     })
-});
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({ message: 'Server Error' });
+    });
+  });
 
 router.delete('/:id', (req, res) => {
     // res.send('DELETE /:id Reached!');
